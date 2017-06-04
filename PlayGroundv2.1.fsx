@@ -1,23 +1,24 @@
-
-[<Measure>] type money;
-[<Measure>] type years;
-
 type Period = 
-    | Years of float<years>
-
-let p =2.0<years> |> Years
-
-let Annual = Period(1.0<years>)
-let SemiAnnual = YearPeriod(0.5<years>)
+    | Days of int
+    | Months of float
+    | Years of float
+    
+// let Annual = Years(1.0)
+// let SemiAnnual = Years(0.5)
 
 type CompoundFrequency = 
 | ContinousCompound 
 | PeriodicCompound of Period //numero de * ao ano
 
-let AnnualCompound = PeriodicCompound(Annual)
+let AnnualCompound = PeriodicCompound(Years(1.0))
 
 
-type InterestRate = | InterestRate of decimal<rate> * Period * CompoundFrequency
+type InterestRate = | InterestRate of decimal * Period * CompoundFrequency
+
+
+let treasuryRate = InterestRate (2M<rate> , Annual , AnnualCompound)
+
+
 
 type Discount = 
 | CompoundFactor of decimal
@@ -25,7 +26,6 @@ type Discount =
 | DiscountRate of InterestRate * Period
 
 
-let taxa = InterestRate (12M<rate> , Annual , AnnualCompound)
 (taxa, 2.0M<years>) |> DiscountRate
 
 
