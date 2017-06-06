@@ -10,16 +10,60 @@ let inline intToFloat (x:int<'u>) : float<'u> =
     x |> float |>  LanguagePrimitives.FloatWithMeasure
 
 
+//Active patterns for datetime
+let (|Date|) (date:DateTime) = (date.Year, date.Month, date.Day)
+let (|EndOfMonth|StartOfMonth|MiddleOfMonth|) (date:DateTime) = 
+    match date with
+    | Date(_, m , 1) -> StartOfMonth(m) 
+    | d when (DateTime(d.AddMonths(1).Year, d.AddMonths(1).Month, 1).AddDays(-1.0)) = d -> EndOfMonth(d.Month) 
+    | Date(_, m , _) -> MiddleOfMonth(m)
+
+let (|Weekday|Weekend|) (date:DateTime) = 
+    match date.DayOfWeek with
+    | DayOfWeek.Sunday
+    | DayOfWeek.Saturday -> Weekend
+    | _ -> Weekday
+
+
 // //Redefinicao de operadores
-let (?+) (dt:DateTime) (days:int<days>) = dt.AddDays(float days);;
-let (?+) (dt:DateTime) (months:int<months>) = dt.AddMonths(int months);;
-let (?+) (dt:DateTime) (years:int<years>) = dt.AddYears(int years);;
+type Holidays = DateTime list 
 
 
-type Hollidays = DateTime list;;
+// let holidays = [1.0..10.0] |> List.map (DateTime(2010, 01, 01).AddDays)
+
+
+let networkdays (holidays:DateTime list)= 
+    let rec calc dates holidays acc = 
+        match (dates, holidays) with
+        |(d::dtail, h::htail) when d = h -> acc::(calc dtail htail acc)
+        |(Weekend::dtail, h) -> acc::(calc dtail h acc)
+        |(d::dtail, h)  -> acc+1::(calc dtail h (acc+1))
+        |([], _) -> []
+    let firstDay = holidays.[0]
+    let lastDay = holidays |> List.last;
+    let dates = List.unfold (fun x-> if (x <= lastDay) then Some (x, x.AddDays(1.0)) else None) firstDay
+    let networkdaysBeteen  (startDate:DateTime) (endDate:DateTime)  = 
+        // calculo sem calendario
+        let workdaysBetween (_startDate:DateTime) (_endDate:DateTime) = 
+            let startDate = Seq.initInfinite (float >> _startDate.AddDays) |> Seq.find (fun x-> match x with |Weekend -> false | _ -> true)
+            let endDate = Seq.initInfinite (((*)-1) >> float >> _endDate.AddDays) |> Seq.find (fun x-> match x with |Weekend -> false | _ -> true)
+            let actualDays = endDate.Subtract(startDate).TotalDays 
+            let weekCount = (actualDays |> int) / 7
+            match (int startDate.DayOfWeek, int endDate.DayOfWeek) with
+            | (w1, w2) when w1 > w2 -> w2 - w1 + 5 + weekCount * 5
+            | (w1, w2) -> w2 - w1 + weekCount * 5
+        let workdayCount = calc dates holidays -1
+        let workdaysBefore = if (startDate < firstDay) then workdaysBetween startDate firstDay else 0
+        let workdaysAfter = if (endDate > lastDay) then workdaysBetween lastDay endDate else 0
+        let workdaysBetween = workdayCount.[int ((max startDate firstDay).Subtract(firstDay).TotalDays)] - workdayCount.[int ((min endDate lastDay).Subtract(firstDay).TotalDays)]
+        workdaysBefore + workdaysAfter + workdaysBetween
+    networkdaysBeteen
+
+
+
 
 type DayCountConvention = 
-    | DCWD252 of Hollidays
+    | DCWD252 of Holidays
     | DC30E360
     | DC30360US
     | DCACT360
@@ -29,13 +73,6 @@ type DayCountConvention =
 //Subtract 2 days
 let actualDaysBetween (date1:DateTime) (date2:DateTime) = (int (date2.Subtract(date1).TotalDays)) * 1<days>
 
-//Active patterns for datetime
-let (|Date|) (date:DateTime) = (date.Year, date.Month, date.Day)
-let (|EndOfMonth|StartOfMonth|MiddleOfMonth|) (date:DateTime) = 
-    match date with
-    | Date(_, m , 1) -> StartOfMonth(m) 
-    | d when (DateTime(d.AddMonths(1).Year, d.AddMonths(1).Month, 1).AddDays(-1.0)) = d -> EndOfMonth(d.Month) 
-    | Date(_, m , _) -> MiddleOfMonth(m)
 
 
 //Daycount using convention
@@ -123,11 +160,11 @@ type Period =
     | Month of float<months>
     | Days of int<days>
 
-let p2 =2.0<years> |> Years
-let p1 =2.0<years> |> Years
+// let p2 =2.0<years> |> Years
+// let p1 =2.0<years> |> Years
 
-p2 - p1.
-
+// p2 - p1.
+//----------------
 let Annual = Period(1.0<years>)
 let SemiAnnual = YearPeriod(0.5<years>)
 
