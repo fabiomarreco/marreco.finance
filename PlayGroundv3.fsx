@@ -42,7 +42,7 @@ let networkdays (holidays:DateTime list)=
     let firstDay = holidays.[0]
     let lastDay = holidays |> List.last;
     let dates = List.unfold (fun x-> if (x <= lastDay) then Some (x, x.AddDays(1.0)) else None) firstDay
-    let networkdaysBeteen  (startDate:DateTime) (endDate:DateTime)  = 
+    let networkdaysBetween  (startDate:DateTime) (endDate:DateTime)  = 
         // calculo sem calendario
         let workdaysBetween (_startDate:DateTime) (_endDate:DateTime) = 
             let startDate = Seq.initInfinite (float >> _startDate.AddDays) |> Seq.find (fun x-> match x with |Weekend -> false | _ -> true)
@@ -57,7 +57,7 @@ let networkdays (holidays:DateTime list)=
         let workdaysAfter = if (endDate > lastDay) then workdaysBetween lastDay endDate else 0
         let workdaysBetween = workdayCount.[int ((max startDate firstDay).Subtract(firstDay).TotalDays)] - workdayCount.[int ((min endDate lastDay).Subtract(firstDay).TotalDays)]
         workdaysBefore + workdaysAfter + workdaysBetween
-    networkdaysBeteen
+    networkdaysBetween
 
 
 
