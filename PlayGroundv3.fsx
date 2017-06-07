@@ -192,3 +192,11 @@ let toDiscountFactor v =
     | DiscountFactor d -> d |> DiscountFactor
     | CompoundFactor c -> 1.0M/c |> DiscountFactor
     | DiscountRate (rate , period) -> 
+
+
+
+let cc a b c = 
+    printfn "%A %A %A" a b c
+
+
+"asdasdasd" |> cc "b" "c"

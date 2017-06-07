@@ -125,3 +125,4 @@ let rec calc2 holidays acc date =
     match (date,holidays) with
     | (d, h::t) when d = h -> acc::(calc2 t acc date.AddDays(1.0))
     | (Weekend, hs) -> acc::(calc2 hs acc date.AddDays(1.0))
+    | (
