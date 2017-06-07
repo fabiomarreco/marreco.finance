@@ -31,4 +31,4 @@ module Library =
   | Rate of decimal<rate> * CompoundFrequency * PeriodOfRate * decimal<yearperiod>
 
 
-  (12.0M<rate>, Annual, ``Per annum``, 1.0M<yearperiod>) |> Rate
+  (12.0M<rate>, Annual, ``Per annum``, 1.0M<yearperiod>) |> Rate |> ignore
