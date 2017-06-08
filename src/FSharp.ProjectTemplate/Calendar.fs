@@ -123,6 +123,6 @@ List.unfold (fun x-> if (x <= lastDay) then Some (x, x.AddDays(1.0)) else None) 
 
 let rec calc2 holidays acc date = 
     match (date,holidays) with
-    | (d, h::t) when d = h -> acc::(calc2 t acc date.AddDays(1.0))
-    | (Weekend, hs) -> acc::(calc2 hs acc date.AddDays(1.0))
-    | (
+    | (d, h::t) when d = h -> acc::(calc2 t acc (date.AddDays(1.0)))
+    | (Weekend, hs) -> acc::(calc2 hs acc (date.AddDays(1.0)))
+    | (d, h) -> (acc+1)::(calc2 h (acc+1) (date.AddDays(1.0)))
