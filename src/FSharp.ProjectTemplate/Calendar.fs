@@ -107,7 +107,7 @@ module public Calendar =
 
 
 //--- teste
-let holidays = [DateTime(2017,06,09); DateTime(2017,06,13)]
+let holidays = [DateTime(2017,06,09); DateTime(2017,06,13); DateTime(2017,06,13)]
 let firstDay = holidays.[0];
 let lastDay = holidays |> List.last;
 
@@ -121,8 +121,12 @@ List.unfold (fun x-> if (x <= lastDay) then Some (x, x.AddDays(1.0)) else None) 
                 |> calc holidays 0  |> List.toArray
 
 
-let rec calc2 holidays acc date = 
+let rec calc2 holidays acc (date:DateTime) = 
     match (date,holidays) with
     | (d, h::t) when d = h -> acc::(calc2 t acc (date.AddDays(1.0)))
     | (Weekend, hs) -> acc::(calc2 hs acc (date.AddDays(1.0)))
+    | (_, []) -> []
     | (d, h) -> (acc+1)::(calc2 h (acc+1) (date.AddDays(1.0)))
+    | _ -> []
+
+calc2 holidays 0 firstDay
