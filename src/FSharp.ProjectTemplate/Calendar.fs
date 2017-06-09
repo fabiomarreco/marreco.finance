@@ -24,17 +24,17 @@ module public Calendar =
         | _ -> Weekday
         
     type Calendar (holidays:List<DateTime>) = 
-        let rec calc holidays acc dates = 
-            match (dates, holidays) with
-            |(d::dtail, h::htail) when d = h -> acc::(calc htail acc dtail)
-            |(Weekend::dtail, h) -> acc::(calc h acc dtail)
-            |(_::dtail, h)  -> acc+1::(calc h (acc+1) dtail)
-            |([], _) -> []
+        let rec expandWorkdayCount holidays acc (date:DateTime) = 
+            match (date,holidays) with
+            | (d, h::t) when d = h -> acc::(expandWorkdayCount t acc (date.AddDays(1.0)))
+            | (Weekend, hs) -> acc::(expandWorkdayCount hs acc (date.AddDays(1.0)))
+            | (_, []) -> []
+            | (d, h) -> (acc+1)::(expandWorkdayCount h (acc+1) (date.AddDays(1.0)))
+            | _ -> []
         let firstDay = holidays.[0]
         let lastDay = holidays |> List.last;
-        let workdayCount = List.unfold (fun x-> if (x <= lastDay) then Some (x, x.AddDays(1.0)) else None) firstDay
-                           |> calc holidays -1  |> List.toArray
-        let networkdays  (startDate:DateTime) (endDate:DateTime)  = 
+        let workdayCount = expandWorkdayCount holidays 0 firstDay
+        member x.NetworkDays (startDate:DateTime) (endDate:DateTime)  = 
             // calculo sem calendario
             let workdaysBetween (_startDate:DateTime) (_endDate:DateTime) = 
                 let startDate = Seq.initInfinite (float >> _startDate.AddDays) |> Seq.find (fun x-> match x with |Weekend -> false | _ -> true)
@@ -49,9 +49,6 @@ module public Calendar =
             let workdaysBetween = workdayCount.[int ((max startDate firstDay).Subtract(firstDay).TotalDays)] - workdayCount.[int ((min endDate lastDay).Subtract(firstDay).TotalDays)]
             (workdaysBefore + workdaysAfter + workdaysBetween) * 1<days>
         member x.Holidays = holidays
-        member x.NetworkDays = networkdays
-        member x.Workday
-
 
 
     type DayCountConvention = 
@@ -64,8 +61,6 @@ module public Calendar =
 
     //Subtract 2 days
     let actualDaysBetween (date1:DateTime) (date2:DateTime) = (int (date2.Subtract(date1).TotalDays)) * 1<days>
-
-
 
     //Daycount using convention
     let rec daysBetween dayCountConvention (date1:DateTime) (date2:DateTime) = 
@@ -104,29 +99,3 @@ module public Calendar =
                                     let daysInYear (dt:DateTime) = (if (DateTime.IsLeapYear(dt.Year)) then 366.0<days> else 365.0<days>)/1.0<years>
                                     (intToFloat (actualDaysBetween d1 d2)) / (daysInYear d1))
 
-
-
-//--- teste
-let holidays = [DateTime(2017,06,09); DateTime(2017,06,13); DateTime(2017,06,13)]
-let firstDay = holidays.[0];
-let lastDay = holidays |> List.last;
-
-let rec calc holidays acc dates = 
-            match (dates, holidays) with
-            |(d::dtail, h::htail) when d = h -> acc::(calc htail acc dtail)
-            |(Weekend::dtail, h) -> acc::(calc h acc dtail)
-            |(_::dtail, h)  -> acc+1::(calc h (acc+1) dtail)
-            |([], _) -> []
-List.unfold (fun x-> if (x <= lastDay) then Some (x, x.AddDays(1.0)) else None) firstDay
-                |> calc holidays 0  |> List.toArray
-
-
-let rec calc2 holidays acc (date:DateTime) = 
-    match (date,holidays) with
-    | (d, h::t) when d = h -> acc::(calc2 t acc (date.AddDays(1.0)))
-    | (Weekend, hs) -> acc::(calc2 hs acc (date.AddDays(1.0)))
-    | (_, []) -> []
-    | (d, h) -> (acc+1)::(calc2 h (acc+1) (date.AddDays(1.0)))
-    | _ -> []
-
-calc2 holidays 0 firstDay
