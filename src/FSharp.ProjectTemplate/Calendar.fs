@@ -8,6 +8,29 @@ module public Calendar =
     [<Measure>] type months;
     [<Measure>] type days;
 
+
+    type Period =
+    | Days of int<days>
+    | Months of int<months>
+    | Years of float<years>
+
+
+    type DiscreteFrequency = 
+    | TimesPerDay of int</days>
+    | TimesPerMonth of int</months>
+    | TimesPerYear of int</years>
+
+    type Frequency = 
+    | Continous
+    | Periodic of DiscreteFrequency
+
+    let Annually = 1</years> |> TimesPerYear |> Periodic
+    let Daily = 1</days> |> TimesPerDay |> Periodic
+    let Monthly = 1</days> |> TimesPerDay |> Periodic
+    let SemiAnnally = 2</years> |> TimesPerYear |> Periodic
+    let Quarterly = 4</years> |> TimesPerYear |> Periodic
+
+
     //Active patterns for datetime
     let (|Date|) (date:DateTime) = (date.Year, date.Month, date.Day)
 
