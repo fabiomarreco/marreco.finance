@@ -1,4 +1,4 @@
-﻿// Learn more about F# at http://fsharp.org. See the 'F# Tutorial' project
+// Learn more about F# at http://fsharp.org. See the 'F# Tutorial' project
 // for more guidance on F# programming.
 
 #load "Library.fs"
@@ -28,10 +28,18 @@ let json = JsonConvert.SerializeObject calendar
 
 let cc = JsonConvert.DeserializeObject<Calendar> json 
 
+let rec loop acc = function
+        | [] -> acc
+        | x::xs -> loop (x::acc) xs
+
+let teste x = function
+        | 1 -> "A" + x
+        | 2 -> "B" + x
 
 
+teste "a" 2
 
-
+let hols = 
 [|
         "1990-01-01";
         "1990-02-26";
@@ -1352,3 +1360,10 @@ let cc = JsonConvert.DeserializeObject<Calendar> json
         "2099-11-15";
         "2099-12-25";
         "2100-01-01"|] |> Array.map (fun x-> DateTime.Parse(x)) |> Array.toList
+
+
+hols |> List.last
+
+
+
+
