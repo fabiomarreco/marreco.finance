@@ -5,17 +5,16 @@ open Calendar
 module public Interest =
 
     type CompoundFrequency = 
-    | ContinousCompound
-    | PeriodicCompound of Frequency
+    | Compounded of Frequency
+
+    let AnnualyCompounded = Compounded (1</years> |> TimesPerYear)
 
 
-    let (|AnnualCompound|MonthlyCompound|DailyCompound|_|) (compound:CompoundFrequency) = 
-    match compound with
-    | 
+    type RateBase = | Base of Period
 
-    type InterestRate  = 
-    | InterestRate of Period * CompoundFrequency
 
-    type DiscountConvention = 
-    | Rate
+
+    type InterestRate = 
+    | Rate of float * RateBase * CompoundFrequency * DayCountConvention
+
 

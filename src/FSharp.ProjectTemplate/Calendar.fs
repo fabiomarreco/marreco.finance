@@ -14,21 +14,21 @@ module public Calendar =
     | Months of int<months>
     | Years of float<years>
 
+    let years (y:float<1>) = y * 1.0<years> |> Years
 
-    type DiscreteFrequency = 
+
+    type Frequency  = 
+    | Continous
     | TimesPerDay of int</days>
     | TimesPerMonth of int</months>
     | TimesPerYear of int</years>
 
-    type Frequency = 
-    | Continous
-    | Periodic of DiscreteFrequency
 
-    let Annually = 1</years> |> TimesPerYear |> Periodic
-    let Daily = 1</days> |> TimesPerDay |> Periodic
-    let Monthly = 1</days> |> TimesPerDay |> Periodic
-    let SemiAnnally = 2</years> |> TimesPerYear |> Periodic
-    let Quarterly = 4</years> |> TimesPerYear |> Periodic
+    let Annually = 1</years> |> TimesPerYear 
+    let Daily = 1</days> |> TimesPerDay
+    let Monthly = 1</days> |> TimesPerDay
+    let SemiAnnally = 2</years> |> TimesPerYear
+    let Quarterly = 4</years> |> TimesPerYear
 
 
     //Active patterns for datetime
@@ -47,14 +47,16 @@ module public Calendar =
         | DayOfWeek.Saturday -> Weekend
         | _                  -> Weekday
         
-    type Calendar (holidays:List<DateTime>) = 
+    [<StructuredFormatDisplay("{Name}")>]
+    type Calendar (name:string, holidays:List<DateTime>) = 
         let rec expandWorkdayCount holidays acc (date:DateTime) = 
+            printfn "Date: %A" date
             match (date,holidays) with
             | (d, h::t) when d = h -> acc::(expandWorkdayCount t acc (date.AddDays(1.0)))
             | (Weekend, hs) -> acc::(expandWorkdayCount hs acc (date.AddDays(1.0)))
             | (_, []) -> []
             | (_, h) -> (acc+1)::(expandWorkdayCount h (acc+1) (date.AddDays(1.0)))
-            | _ -> []
+            //| _ -> []
         let firstDay = holidays.[0]
         let lastDay = holidays |> List.last;
         let workdayCount = expandWorkdayCount holidays 0 firstDay
@@ -73,6 +75,8 @@ module public Calendar =
             let workdaysBetween = workdayCount.[int ((max startDate firstDay).Subtract(firstDay).TotalDays)] - workdayCount.[int ((min endDate lastDay).Subtract(firstDay).TotalDays)]
             (workdaysBefore + workdaysAfter + workdaysBetween) * 1<days>
         member x.Holidays = holidays
+
+        member x.Name = name
 
 
     type DayCountConvention = 
