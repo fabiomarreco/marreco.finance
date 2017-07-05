@@ -50,13 +50,13 @@ module public Calendar =
     [<StructuredFormatDisplay("{Name}")>]
     type Calendar (name:string, holidays:List<DateTime>) = 
         let rec expandWorkdayCount holidays acc (date:DateTime) = 
-            printfn "Date: %A" date
+            //printfn "Date: %A" date
             match (date,holidays) with
-            | (d, h::t) when d = h -> acc::(expandWorkdayCount t acc (date.AddDays(1.0)))
-            | (Weekend, hs) -> acc::(expandWorkdayCount hs acc (date.AddDays(1.0)))
-            | (_, []) -> []
-            | (_, h) -> (acc+1)::(expandWorkdayCount h (acc+1) (date.AddDays(1.0)))
-            //| _ -> []
+            | (d, h::t) when d = h -> (*acc::*) expandWorkdayCount t acc (date.AddDays(1.0))
+            | (Weekend, hs) -> (*acc::*)expandWorkdayCount hs acc (date.AddDays(1.0))
+            | (_, []) -> [ acc ]
+            | (_, h) -> (*(acc+1)*) expandWorkdayCount h (acc+1) (date.AddDays(1.0))
+            | _ -> [ acc ]
         let firstDay = holidays.[0]
         let lastDay = holidays |> List.last;
         let workdayCount = expandWorkdayCount holidays 0 firstDay
@@ -72,7 +72,7 @@ module public Calendar =
                 | (w1, w2) -> w2 - w1 + weekCount * 5
             let workdaysBefore = if (startDate < firstDay) then workdaysBetween startDate firstDay else 0
             let workdaysAfter = if (endDate > lastDay) then workdaysBetween lastDay endDate else 0
-            let workdaysBetween = workdayCount.[int ((max startDate firstDay).Subtract(firstDay).TotalDays)] - workdayCount.[int ((min endDate lastDay).Subtract(firstDay).TotalDays)]
+            let workdaysBetween = workdayCount.[int ((min endDate lastDay).Subtract(firstDay).TotalDays)] - workdayCount.[int ((max startDate firstDay).Subtract(firstDay).TotalDays)]
             (workdaysBefore + workdaysAfter + workdaysBetween) * 1<days>
         member x.Holidays = holidays
 

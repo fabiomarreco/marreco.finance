@@ -50,7 +50,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
-    <Compile Include="Calendar.fs" />
+    <Compile Include="CalendarTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <Import Project="..\..\packages\Microsoft.DiaSymReader.Native\build\Microsoft.DiaSymReader.Native.props" Condition="Exists('..\..\packages\Microsoft.DiaSymReader.Native\build\Microsoft.DiaSymReader.Native.props')" Label="Paket" />
