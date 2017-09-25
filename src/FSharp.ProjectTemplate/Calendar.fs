@@ -23,7 +23,6 @@ module public Calendar =
     | TimesPerMonth of int</months>
     | TimesPerYear of int</years>
 
-
     let Annually = 1</years> |> TimesPerYear 
     let Daily = 1</days> |> TimesPerDay
     let Monthly = 1</days> |> TimesPerDay
@@ -49,17 +48,16 @@ module public Calendar =
         
     [<StructuredFormatDisplay("{Name}")>]
     type Calendar (name:string, holidays:List<DateTime>) = 
-        let rec expandWorkdayCount holidays acc (date:DateTime) = 
-            //printfn "Date: %A" date
-            match (date,holidays) with
-            | (d, h::t) when d = h -> (*acc::*) expandWorkdayCount t acc (date.AddDays(1.0))
-            | (Weekend, hs) -> (*acc::*)expandWorkdayCount hs acc (date.AddDays(1.0))
-            | (_, []) -> [ acc ]
-            | (_, h) -> (*(acc+1)*) expandWorkdayCount h (acc+1) (date.AddDays(1.0))
-            | _ -> [ acc ]
+        let rec expandWorkdayCount holidayLst acc count (date:DateTime) = 
+            match (date,holidayLst) with
+            | (_, []) -> acc |> List.rev
+            | (d, h::t) when d = h ->printfn "1a"; expandWorkdayCount t (count::acc) count (date.AddDays(1.0))
+            | (Weekend, hs) -> printfn "1b"; expandWorkdayCount hs (count::acc) count (date.AddDays(1.0))
+            | (_, h) -> printfn "1c"; expandWorkdayCount h (((count+1)::acc)) (count+1) (date.AddDays(1.0))
+            | _ -> acc |> List.rev
         let firstDay = holidays.[0]
         let lastDay = holidays |> List.last;
-        let workdayCount = expandWorkdayCount holidays 0 firstDay
+        let workdayCount = expandWorkdayCount holidays [] 0 firstDay
         member x.NetworkDays (startDate:DateTime) (endDate:DateTime)  = 
             // calculo sem calendario
             let workdaysBetween (_startDate:DateTime) (_endDate:DateTime) = 

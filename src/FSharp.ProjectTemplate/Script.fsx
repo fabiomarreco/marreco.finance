@@ -9,9 +9,46 @@
 #r "C:\\Projetos\\github\\marreco.finance\\packages\\Newtonsoft.Json\\lib\\net45\\Newtonsoft.Json.dll"
 #r "bin\\Debug\\FSharp.ProjectTemplate.dll"
 
+
+
+
 open System;
 open FSharp.ProjectTemplate.Calendar
 open FSharp.ProjectTemplate.Interest
+
+// ------
+let holidays = [DateTime(2017,06,01); DateTime(2017,06,30)]
+//let holidays = [DateTime(2017,06,01); DateTime(2017,06,30); DateTime(2017,07,01); DateTime(2017,07,04); DateTime(2017,10,10)]
+let firstDay = holidays.[0]
+
+
+//let rec expand currentDate acc holidays = function
+// let rec expandWorkdayCount holidays acc (date:DateTime) = 
+//     match (date,holidays) with
+//     | (d, h::t) when d = h -> acc::(expandWorkdayCount t acc (date.AddDays(1.0)))
+//     | (Weekend, hs) -> acc::(expandWorkdayCount hs acc (date.AddDays(1.0)))
+//     | (_, []) -> [ acc ]
+//     | (_, h) -> (acc+1):: (expandWorkdayCount h (acc+1) (date.AddDays(1.0)))
+//     | _ -> [ acc ]
+let l = [1..20]
+
+l@[5]
+let dt = DateTime(2017,06,02)
+dt.DayOfWeek
+match dt with | Weekend -> "oi" | _ -> "nao"
+
+
+let rec expandWorkdayCount holiday_list acc count (date:DateTime) = 
+//     let fst = (holiday_list |> Seq.head)
+//     printfn "%A-%A" date fst
+    match (date,holiday_list) with
+    | (_, []) -> acc |> List.rev
+    | (d, h::t) when d = h ->printfn "1a"; expandWorkdayCount t (count::acc) count (date.AddDays(1.0))
+    | (Weekend, hs) -> printfn "1b"; expandWorkdayCount hs (count::acc) count (date.AddDays(1.0))
+    | (_, h) -> printfn "1c"; expandWorkdayCount h (((count+1)::acc)) (count+1) (date.AddDays(1.0))
+    | _ -> acc |> List.rev
+
+expandWorkdayCount holidays [] 0 firstDay
 // //--------------------
 let calendar = new Calendar ("brazil", [DateTime(2010,01,01); DateTime(2010,02,02)])
 let cdi =  (0.12, Base (years 1.0), AnnualyCompounded, DCWD252 calendar) |> Rate
@@ -1367,3 +1404,6 @@ hols |> List.last
 
 
 
+
+
+0 1 1 1 2 3 4 5 6 6 6 7 8 9 10 11 11 11 12 13 14 15 16 16 16 17 18 19 20 20 20 20 21 22 23 24 25 25 25 26 27 28 29 30 30 30 31 32
