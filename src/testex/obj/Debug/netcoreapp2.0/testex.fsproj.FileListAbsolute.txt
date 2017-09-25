@@ -1,0 +1,11 @@
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\xunit.runner.utility.netstandard15.dll
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netstandard15.dll
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\testex.deps.json
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\testex.runtimeconfig.json
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\testex.runtimeconfig.dev.json
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\testex.dll
+c:\projetos\github\marreco.finance.2\src\testex\bin\Debug\netcoreapp2.0\testex.pdb
+c:\projetos\github\marreco.finance.2\src\testex\obj\Debug\netcoreapp2.0\testex.fsproj.CoreCompileInputs.cache
+c:\projetos\github\marreco.finance.2\src\testex\obj\Debug\netcoreapp2.0\testex.dll
+c:\projetos\github\marreco.finance.2\src\testex\obj\Debug\netcoreapp2.0\testex.pdb
