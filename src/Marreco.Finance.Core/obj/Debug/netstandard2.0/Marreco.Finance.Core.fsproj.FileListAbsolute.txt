@@ -4,3 +4,9 @@ C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core\bin\Debug\netstand
 C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core\obj\Debug\netstandard2.0\Marreco.Finance.Core.fsproj.CoreCompileInputs.cache
 C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core\obj\Debug\netstandard2.0\Marreco.Finance.Core.dll
 C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core\obj\Debug\netstandard2.0\Marreco.Finance.Core.pdb
+C:\projetos\github\marreco.finance\src\Marreco.Finance.Core\bin\Debug\netstandard2.0\Marreco.Finance.Core.deps.json
+C:\projetos\github\marreco.finance\src\Marreco.Finance.Core\bin\Debug\netstandard2.0\Marreco.Finance.Core.dll
+C:\projetos\github\marreco.finance\src\Marreco.Finance.Core\bin\Debug\netstandard2.0\Marreco.Finance.Core.pdb
+C:\projetos\github\marreco.finance\src\Marreco.Finance.Core\obj\Debug\netstandard2.0\Marreco.Finance.Core.fsproj.CoreCompileInputs.cache
+C:\projetos\github\marreco.finance\src\Marreco.Finance.Core\obj\Debug\netstandard2.0\Marreco.Finance.Core.dll
+C:\projetos\github\marreco.finance\src\Marreco.Finance.Core\obj\Debug\netstandard2.0\Marreco.Finance.Core.pdb

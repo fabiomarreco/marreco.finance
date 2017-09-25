@@ -3853,11 +3853,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj",
+      "projectUniqueName": "c:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj",
       "projectName": "Marreco.Finance.Core",
-      "projectPath": "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj",
+      "projectPath": "c:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj",
       "packagesPath": "C:\\Users\\fabio.marreco\\.nuget\\packages\\",
-      "outputPath": "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\obj\\",
+      "outputPath": "c:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
