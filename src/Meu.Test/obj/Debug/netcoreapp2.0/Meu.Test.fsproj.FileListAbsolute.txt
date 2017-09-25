@@ -1,8 +1,0 @@
-c:\projetos\github\marreco.finance.2\src\Meu.Test\bin\Debug\netcoreapp2.0\Meu.Test.deps.json
-c:\projetos\github\marreco.finance.2\src\Meu.Test\bin\Debug\netcoreapp2.0\Meu.Test.runtimeconfig.json
-c:\projetos\github\marreco.finance.2\src\Meu.Test\bin\Debug\netcoreapp2.0\Meu.Test.runtimeconfig.dev.json
-c:\projetos\github\marreco.finance.2\src\Meu.Test\bin\Debug\netcoreapp2.0\Meu.Test.dll
-c:\projetos\github\marreco.finance.2\src\Meu.Test\bin\Debug\netcoreapp2.0\Meu.Test.pdb
-c:\projetos\github\marreco.finance.2\src\Meu.Test\obj\Debug\netcoreapp2.0\Meu.Test.fsproj.CoreCompileInputs.cache
-c:\projetos\github\marreco.finance.2\src\Meu.Test\obj\Debug\netcoreapp2.0\Meu.Test.dll
-c:\projetos\github\marreco.finance.2\src\Meu.Test\obj\Debug\netcoreapp2.0\Meu.Test.pdb

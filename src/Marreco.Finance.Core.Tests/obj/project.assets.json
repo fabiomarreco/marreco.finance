@@ -7045,11 +7045,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projetos\\github\\marreco.finance.2\\src\\Marreco.Finance.Core.Tests\\Marreco.Finance.Core.Tests.fsproj",
+      "projectUniqueName": "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core.Tests\\Marreco.Finance.Core.Tests.fsproj",
       "projectName": "Marreco.Finance.Core.Tests",
-      "projectPath": "C:\\projetos\\github\\marreco.finance.2\\src\\Marreco.Finance.Core.Tests\\Marreco.Finance.Core.Tests.fsproj",
+      "projectPath": "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core.Tests\\Marreco.Finance.Core.Tests.fsproj",
       "packagesPath": "C:\\Users\\fabio.marreco\\.nuget\\packages\\",
-      "outputPath": "C:\\projetos\\github\\marreco.finance.2\\src\\Marreco.Finance.Core.Tests\\obj\\",
+      "outputPath": "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7068,8 +7068,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\projetos\\github\\marreco.finance.2\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj": {
-              "projectPath": "C:\\projetos\\github\\marreco.finance.2\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj"
+            "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj": {
+              "projectPath": "C:\\projetos\\github\\marreco.finance\\src\\Marreco.Finance.Core\\Marreco.Finance.Core.fsproj"
             }
           }
         }

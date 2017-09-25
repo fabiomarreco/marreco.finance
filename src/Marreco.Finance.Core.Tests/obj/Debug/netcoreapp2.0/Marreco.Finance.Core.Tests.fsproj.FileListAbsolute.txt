@@ -11,3 +11,16 @@ C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core.Tests\bin\Debug\ne
 C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core.Tests\obj\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.fsproj.CoreCompileInputs.cache
 C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core.Tests\obj\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.dll
 C:\projetos\github\marreco.finance.2\src\Marreco.Finance.Core.Tests\obj\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.pdb
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\xunit.runner.utility.netstandard15.dll
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netstandard15.dll
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.deps.json
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.runtimeconfig.json
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.runtimeconfig.dev.json
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.dll
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.pdb
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\Marreco.Finance.Core.dll
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\bin\Debug\netcoreapp2.0\Marreco.Finance.Core.pdb
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\obj\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.fsproj.CoreCompileInputs.cache
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\obj\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.dll
+c:\projetos\github\marreco.finance\src\Marreco.Finance.Core.Tests\obj\Debug\netcoreapp2.0\Marreco.Finance.Core.Tests.pdb
