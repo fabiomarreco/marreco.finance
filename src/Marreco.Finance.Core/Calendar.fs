@@ -55,7 +55,7 @@ module public Calendar =
             | (Weekend, hs) -> printfn "1b"; expandWorkdayCount hs (count::acc) count (date.AddDays(1.0))
             | (_, h) -> printfn "1c"; expandWorkdayCount h (((count+1)::acc)) (count+1) (date.AddDays(1.0))
             | _ -> acc |> List.rev
-        let firstDay = holidays.[0]
+        let firstDay = match holidays with | h::t -> h | _ -> DateTime.MaxValue
         let lastDay = holidays |> List.last;
         let workdayCount = expandWorkdayCount holidays [] 0 firstDay
         member x.NetworkDays (startDate:DateTime) (endDate:DateTime)  = 
