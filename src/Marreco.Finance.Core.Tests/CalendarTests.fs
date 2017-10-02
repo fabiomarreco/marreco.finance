@@ -38,4 +38,16 @@ let ``when calculating networkdays workdays is greater or equal to networkdays``
         let actualdays = (int (endDate.Subtract(startDate).TotalDays)) * 1<days>
         actualdays >= wdays
     FsCheck.Check.QuickThrowOnFailure networkdayslesserorequaltoworkdays
-    
+
+let start = DateTime.Now.Date.AddMonths(-3);
+let endDate = DateTime.Now.Date
+
+[<Fact>]
+let ``given 2 dates, when calculating weekend day count result equals brute force`` () =
+    let bruteForceWeekendsequalsFormula (start:DateTime, endDate:DateTime) = 
+        let (d1, d2) = if(start <= endDate) then (start.Date, endDate.Date) else (endDate.Date, start.Date);
+        let expected = Seq.unfold (fun d -> if (d > d2) then None else Some(d, d.AddDays(1.0))) d1 |> Seq.choose (fun d-> match d with |Weekend -> Some(d) | _ -> None) |> Seq.length
+        let actual = weekendDaysBetween start endDate
+        (actual |> int) = expected
+    FsCheck.Check.QuickThrowOnFailure bruteForceWeekendsequalsFormula
+

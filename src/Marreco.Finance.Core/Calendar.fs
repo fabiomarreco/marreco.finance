@@ -7,7 +7,7 @@ module public Calendar =
     [<Measure>] type years;
     [<Measure>] type months;
     [<Measure>] type days;
-
+    [<Measure>] type weeks;
 
     type Period =
     | Days of int<days>
@@ -45,6 +45,29 @@ module public Calendar =
         | DayOfWeek.Sunday
         | DayOfWeek.Saturday -> Weekend
         | _                  -> Weekday
+
+
+    let weekendDaysBetween  = 
+        let countWeekends (_startDate:DateTime) (_endDate:DateTime) = 
+            let startDate = _startDate.Date;
+            let endDate = _endDate.Date;
+            let days = endDate.Subtract(startDate).Days * 1<days> ;
+            let fullWeeks =days/(7<days/weeks>);
+            let startDayOfWeek = startDate.DayOfWeek;
+            let result = fullWeeks * 2<days/weeks>
+                          + match endDate.DayOfWeek with
+                            | x when x < startDayOfWeek -> 2<days>
+                            | DayOfWeek.Saturday -> 1<days>
+                            | _ -> 0<days>
+                          + match startDayOfWeek with 
+                            | DayOfWeek.Sunday -> 1<days>
+                            | _ -> 0<days>;
+            result;                
+        countWeekends |> orderParams
+
+
+
+
         
     [<StructuredFormatDisplay("{Name}")>]
     type Calendar (name:string, holidays:List<DateTime>) = 

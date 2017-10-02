@@ -12,6 +12,16 @@
 
 open System;
 open Marreco.Finance.Core.Calendar
+let (startDate, endDate) =
+         function 
+         | Regex @"\(([^,]+),\s([^\)]+)" [_;s1;s2] -> (s1, s2)
+         | _ -> raise (System.ArgumentException("error parsing"))
+         >> function 
+            | (DateTimeString d1, DateTimeString d2) -> (d1, d2)
+            | _ ->  raise (System.ArgumentException("invalid datetime"))
+         <| "(22/06/1957 00:00:00, 01/09/2083 00:00:00)" 
+  
+
 
 // ------
 let holidays = [DateTime(2017,06,01); DateTime(2017,06,30)]
