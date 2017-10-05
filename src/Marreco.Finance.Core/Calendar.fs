@@ -1,13 +1,19 @@
 namespace Marreco.Finance.Core
 open System
 open Utilities
-module public Calendar =
+
+module Calendar =
+
+    let private periodCalculation fn d1 d2 = 
+       if (d2 < d1) then -(fn d2 d1)
+       else fn d1 d2
 
     // Units of measure for time
     [<Measure>] type years;
     [<Measure>] type months;
     [<Measure>] type days;
     [<Measure>] type weeks;
+
 
     type Period =
     | Days of int<days>

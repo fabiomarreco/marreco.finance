@@ -10,6 +10,17 @@
 #r "bin\\Debug\\Marreco.Finance.Core.dll"
 
 
+let fn (d1, d2) = d2 - d1
+
+let order f = 
+        function
+        | (x1, x2) when x1 > x2  -> f (x2, x1)
+        | x -> f x
+
+order fn (10, 1)
+(fn  >> order) |> 
+
+
 open System;
 open Marreco.Finance.Core.Calendar
 let (startDate, endDate) =

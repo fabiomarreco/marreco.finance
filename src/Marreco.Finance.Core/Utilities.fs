@@ -9,16 +9,12 @@ module public Utilities =
     let inline public  intToFloat (x:int<'u>) : float<'u> =
         x |> float |>  LanguagePrimitives.FloatWithMeasure
 
-
-
     let inline public apply (fn:float->float) (x:float<'u>)  : float<'u> =
         x |> float |> fn |> LanguagePrimitives.FloatWithMeasure
-
 
     let inline public orderParams fn p1 p2  = 
         if (p1 <= p2) then fn p1 p2
         else fn p2 p1
-
 
     let public (|Regex|_|) pattern input = 
         if input = null then None
