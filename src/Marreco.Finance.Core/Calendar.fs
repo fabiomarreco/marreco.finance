@@ -90,8 +90,8 @@ module Calendar =
         member x.NetworkDays (startDate:DateTime) (endDate:DateTime)  = 
             // calculo sem calendario
             let workdaysBetween (_startDate:DateTime) (_endDate:DateTime) = 
-                let startDate = Seq.initInfinite (float >> _startDate.AddDays) |> Seq.find (fun x-> match x with |Weekend -> false | _ -> true)
-                let endDate = Seq.initInfinite (((*)-1) >> float >> _endDate.AddDays) |> Seq.find (fun x-> match x with |Weekend -> false | _ -> true)
+                let startDate = Seq.initInfinite (float >> _startDate.AddDays) |> Seq.find (function |Weekend -> false | _ -> true)
+                let endDate = Seq.initInfinite (((*)-1) >> float >> _endDate.AddDays) |> Seq.find (function |Weekend -> false | _ -> true)
                 let actualDays = endDate.Subtract(startDate).TotalDays 
                 let weekCount = (actualDays |> int) / 7
                 match (int startDate.DayOfWeek, int endDate.DayOfWeek) with
