@@ -4,6 +4,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utilities.fs" />
+    <Compile Include="ValueObjects\Date.fs" />
+    <Compile Include="DayCount.fs" />
     <Compile Include="Library.fs" />
     <Compile Include="Calendar.fs" />
     <Compile Include="Interest.fs" />
