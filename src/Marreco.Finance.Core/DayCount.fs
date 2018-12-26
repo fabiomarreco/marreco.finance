@@ -48,6 +48,8 @@ module Conventions =
 
             let countDays = countDaysBetween adjustDates
 
+        module 
+
         
         module private Adjustments = 
             let rec bondBasis (startDate, endDate) = 
