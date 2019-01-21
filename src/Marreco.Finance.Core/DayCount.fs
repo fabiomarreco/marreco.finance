@@ -1,9 +1,5 @@
 ﻿module DayCount
 
-[<Measure>] type years;
-[<Measure>] type months;
-[<Measure>] type days;
-[<Measure>] type weeks;
 
 module Conventions = 
     module ``30360`` = 
@@ -54,3 +50,30 @@ module Conventions =
 
 
 
+    module Actual = 
+        open System
+        module ISDA = 
+            let rec dayCountFactor dt1 dt2 : decimal<years> = 
+                let daysInYear y = if (DateTime.IsLeapYear y) then 366M<days/years> else 365M<days/years>
+                let daysBetweenInYear dt1 dt2 = 
+                    let x = Date.DaysBetween dt1 dt2 
+                    let y = match dt1 with | YMD {Y=y; M=_;D=_} -> daysInYear y
+                    x / y
+
+                match (dt1, dt2) with
+                | _ when dt1 = dt2  -> 0M<years>
+                | _ when dt1 > dt2  -> dayCountFactor dt2 dt1 |> (*) (-1M)
+                | (YMD {Y=y1; M=_; D=_}, YMD {Y=y2; M=_; D=_}) when y1 = y2-> (Date.DaysBetween dt1 dt2) / (daysInYear y1)
+                | (YMD {Y=y1; M=_; D=_}, _) -> 
+                        (Date.DaysBetween dt1 (Date.Create (y1+1, 1, 1))) / (daysInYear y1) 
+                        + dayCountFactor (Date.Create (y1+1, 1, 1)) dt2
+                
+
+                (*
+            //let dayCountFactor date1 date2 = Date.DaysBetween date1 date2 |> (/) ()
+            dayCountFactor (Date.Create (2018,01,12)) (Date.Create (2018,12,28));;
+            let x = daysInYear 218
+            let y = Date.DaysBetween (Date.Create (2018,01,12)) (Date.Create (2018,12,28))
+
+            y / x
+            *)

@@ -1,3 +1,4 @@
+[<AutoOpen>]
 module Utilities 
 
 open System.Text.RegularExpressions;
@@ -5,8 +6,12 @@ open System.Text;
 open System;
 
 ///Converts from int to float keeping measure 
+
 let inline public  intToFloat (x:int<'u>) : float<'u> =
     x |> float |>  LanguagePrimitives.FloatWithMeasure
+
+let inline public  intToDec (x:int<'u>) : decimal<'u> =
+    x |> decimal |>  LanguagePrimitives.DecimalWithMeasure
 
 let inline public apply (fn:float->float) (x:float<'u>)  : float<'u> =
     x |> float |> fn |> LanguagePrimitives.FloatWithMeasure
